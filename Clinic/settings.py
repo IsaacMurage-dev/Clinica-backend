@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'authentication.User'
+
 
 # Application definition
 
@@ -78,8 +80,8 @@ DATABASES = {
      'default': {
        'ENGINE': 'django.db.backends.postgresql',
         'NAME':'clinica',
-        'USER':'moringa',
-        'PASSWORD':'password',
+        'USER':'edu',
+        'PASSWORD':'kmox002',
     }
 }
 
