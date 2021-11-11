@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Clinicapp'
+    'Clinicapp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,8 @@ DATABASES = {
      'default': {
        'ENGINE': 'django.db.backends.postgresql',
         'NAME':'clinica',
-        'USER':'moringa',
-        'PASSWORD':'password',
+        'USER':'edu',
+        'PASSWORD':'kmox002',
     }
 }
 
