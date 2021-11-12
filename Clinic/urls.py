@@ -21,12 +21,12 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="PATASHIDA API",
+      title="Clinic API",
       default_version='v1',
       description="Test description",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@patashida.local"),
-      license=openapi.License(name="Patashida License"),
+      contact=openapi.Contact(email="contact@clinic.local"),
+      license=openapi.License(name="Clinic License"),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
@@ -36,7 +36,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('agriapp.urls')),
+    path('auth/', include('Clinicapp.urls')),
     path('', schema_view.with_ui('swagger',
                                  cache_timeout=0), name='schema-swagger-ui'),
 
