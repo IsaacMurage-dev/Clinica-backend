@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin)
 
 from django.db import models
+from django.db.models.deletion import CASCADE
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
@@ -61,3 +62,24 @@ class User(AbstractBaseUser, PermissionsMixin):
             'refresh': str(refresh),
             'access': str(refresh.access_token)
         }
+        
+class Profile(models.Model):
+    user_name=models.OneToOneField(User,on_delete=CASCADE)
+    parent_Name= models.Charfeld(max_length=50)
+    address= models.Charfeld(max_length=50)
+    palceof_birth = models.Charfeld(max_length=50)
+    phone_number= models.Charfeld(max_length=50) 
+    dob= models.Charfeld(max_length=50)
+    
+    def __str__(self):
+        return self.user_name
+    
+    
+    
+# class vaccine
+#     user
+#     vaccine_name
+#     drug_name
+#     batch_number
+#     drug_expiry
+#     next_appointment
