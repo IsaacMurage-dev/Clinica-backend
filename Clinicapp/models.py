@@ -76,10 +76,15 @@ class Profile(models.Model):
     
     
     
-# class vaccine
-#     user
-#     vaccine_name
-#     drug_name
-#     batch_number
-#     drug_expiry
-#     next_appointment
+class vaccine(models.Model):
+    user=models.ForeignKey(User,on_delete=CASCADE)
+    vaccine_name=modeluser=models.CharField(max_length=50)
+    drug_name=modeluser=models.CharField(max_length=50)
+    batch_number=modeluser=models.CharField(max_length=50)
+    drug_expiry=modeluser=models.CharField(max_length=50)
+    next_appointment=modeluser=models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.vaccine_name
+    
+    
