@@ -4,7 +4,8 @@ from rest_framework import permissions, serializers
 from rest_framework.settings import perform_import
 
 from app.permissions import IsAdminOrReadOnly
-from .models import Profile, Vaccine
+from .models import Profile, Vaccine, EmergingDisease,Growth
+
 from django.contrib.auth.models import User
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -19,7 +20,8 @@ from rest_framework import status,generics
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer
+from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,EmergingDiseaseSerializer,GrowthSerializer
+
 # VaccineSerializer
 from .permissions import IsAdminOrReadOnly
 
@@ -167,3 +169,67 @@ class VaccineDetail(generics.RetrieveUpdateDestroyAPIView):
                            code='vaccine_not_found')
 
         return Response(response, status=status.HTTP_200_OK)
+    
+    # growth=========>
+class GrowthList(generics.ListCreateAPIView):
+    querySet = Growth.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = GrowthSerializer
+    
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = GrowthSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_204_OK)
+    
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response({'message': f"Growth has been created"}, status=status.HTTP_201_CREATED)
+    
+class GrowthDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = GrowthSerializer
+    Lookup_url_kwargs = 'growth_id'
+
+
+# emerging disease=========>
+class EmergingDiseaseList(generics.ListCreateAPIView):
+    querySet = EmergingDisease.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmergingDiseaseSerializer
+    
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = EmergingDiseaseSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_204_OK)
+    
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response({'message': f"Disease has been created"}, status=status.HTTP_201_CREATED)
+        
+
+class EmergingDiseaseDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmergingDiseaseSerializer
+    Lookup_url_kwargs = 'disease_id'
+    
+    
+    # def get_queryset(self):
+    #     vaccine_id = self.kwargs["pk"]
+    #     return EmergingDisease.objects.filter(pk=vaccine_id)
+
+
+    # def get(self, request, *args, **kwargs):
+    #     queryset = self.get_queryset()
+    #     serializer = EmergingDiseaseSerializer(queryset, many=True)
+    #     if len(serializer.data):
+    #         [response] = serializer.data
+    #     else:
+    #         raise NotFound('The EmergingDetails is not found',
+    #                        code='EmergingDetails_not_found')
+
+        # return Response(response, status=status.HTTP_200_OK)
+        
