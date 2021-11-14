@@ -62,5 +62,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             'access': str(refresh.access_token)
         }
 
-
-
+class Growth(models.Model):
+    
+    
