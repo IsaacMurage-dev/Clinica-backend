@@ -193,5 +193,27 @@ class GrowthDetail(generics.RetrieveUpdateDestroyAPIView):
     Lookup_url_kwargs = 'growth_id'
 
 
+# emerging disease=========>
+class EmergingDiseaseList(generics.ListCreateAPIView):
+    querySet = EmergingDisease.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmergingDiseaseSerializer
+    
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = EmergingDiseaseSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_204_OK)
+    
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response({'message': f"Disease has been created"}, status=status.HTTP_201_CREATED)
+        
 
+class EmergingDiseaseDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = EmergingDiseaseSerializer
+    Lookup_url_kwargs = 'disease_id'
+    
    
