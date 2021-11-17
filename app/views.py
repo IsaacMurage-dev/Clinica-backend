@@ -71,9 +71,9 @@ class loginUser(APIView):
                 serializer = UserSerializer(user)
                 return Response(serializer.data)
             else:
-                return Response(status=status.HTTP_404_NOT_FOUND)
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # logout user ====================================
