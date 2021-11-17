@@ -145,7 +145,7 @@ class VaccineList(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return Response({'message': f"Vaccine {serializer.data['title']} has been created"}, status=status.HTTP_201_CREATED)
+        return Response({'message': f"Vaccine {serializer.data['vaccine']} has been created"}, status=status.HTTP_201_CREATED)
         
 
 class VaccineDetail(generics.RetrieveUpdateDestroyAPIView):

@@ -37,7 +37,7 @@ class VaccineSerializer(serializers.ModelSerializer):
     # category = serializers.StringRelatedField()
     class Meta:
         model = Vaccine
-        fields = ['title', 'vaccine_name', 'batch_number', 'drug_expiry', 'next_appointment','user_profile'] 
+        fields = ['vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment','user_profile','date_given'] 
         
          
         # growth======
@@ -45,7 +45,7 @@ class GrowthSerializer(serializers.ModelSerializer):
     # category = serializers.StringRelatedField()
     class Meta:
         model = Growth
-        fields = ['patient','patient_name','age', 'weight', 'height', 'HO','date']     
+        fields = ['patient','age', 'weight', 'height', 'HO','date']     
     
     
     # emerging disease====
