@@ -216,20 +216,4 @@ class EmergingDiseaseDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EmergingDiseaseSerializer
     Lookup_url_kwargs = 'disease_id'
     
-    
-    # def get_queryset(self):
-    #     vaccine_id = self.kwargs["pk"]
-    #     return EmergingDisease.objects.filter(pk=vaccine_id)
-
-
-    # def get(self, request, *args, **kwargs):
-    #     queryset = self.get_queryset()
-    #     serializer = EmergingDiseaseSerializer(queryset, many=True)
-    #     if len(serializer.data):
-    #         [response] = serializer.data
-    #     else:
-    #         raise NotFound('The EmergingDetails is not found',
-    #                        code='EmergingDetails_not_found')
-
-        # return Response(response, status=status.HTTP_200_OK)
-        
+   
