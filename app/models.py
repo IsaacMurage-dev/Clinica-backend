@@ -17,13 +17,15 @@ class Category(models.Model):
         return f"{ self.name }"
 
 class Vaccine(models.Model):
-    title = models.CharField(max_length=255)
-    vaccine_name = models.ManyToManyField(User, through='Cart')
+    vaccine = models.CharField(max_length=255)
+    brand_name = models.ManyToManyField(User, through='Cart')
+    
    
     batch_number = models.DecimalField(max_digits=12, decimal_places=2)
     drug_expiry = models.TextField()
     user_profile = CloudinaryField('image')
     next_appointment=models.CharField(max_length=50)
+    date_given = models.DateField()
     link = URLOrRelativeURLField(max_length=200)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='vaccines', null=True)
@@ -67,7 +69,6 @@ class Cart(models.Model):
     # growth=======>
 class Growth(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
-    patient_name=models.CharField(max_length=100)
     age = models.IntegerField()
     weight = models.IntegerField()
     height = models.IntegerField()
@@ -77,7 +78,7 @@ class Growth(models.Model):
     
 
     def __str__(self):
-        return f"{ self.age }"
+        return f"{ self.patient.username }"
     
     def get_absolute_url(self):
             return reverse('', kwargs={'pk': self.pk})
