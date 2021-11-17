@@ -127,9 +127,9 @@ WSGI_APPLICATION = 'clinica.wsgi.application'
 DATABASES = {
      'default': {
        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'clinicapp',
+        'NAME':'clinica',
         'USER':'moringa',
-        'PASSWORD':'2574',
+        'PASSWORD':'password',
     }
 }
 

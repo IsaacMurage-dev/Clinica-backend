@@ -33,9 +33,6 @@ class Vaccine(models.Model):
     def __str__(self):
         return f"{ self.vaccine }"
 
-    def get_absolute_url(self):
-        return reverse('vaccines_detail', kwargs={'pk': self.pk})
-
 
 
 
