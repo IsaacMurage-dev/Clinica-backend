@@ -18,8 +18,7 @@ class Category(models.Model):
 
 class Vaccine(models.Model):
     vaccine = models.CharField(max_length=255)
-    brand_name = models.ManyToManyField(User, through='Cart')
-   
+    brand_name = models.CharField(max_length=255, null=True)
     batch_number = models.DecimalField(max_digits=12, decimal_places=2)
     drug_expiry = models.DateField()
     user_profile = CloudinaryField('image')
