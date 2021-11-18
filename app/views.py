@@ -49,7 +49,6 @@ class UserCreate(APIView): # create user
     """
     Create a user.
     """
-    permission_classes = (IsAdminOrReadOnly,)
 
     def post(self, request, format=None):
         serializer = UserCreateSerializer(data=request.data)
@@ -132,14 +131,14 @@ class ProfileDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class VaccineList(generics.ListCreateAPIView):
-    querySet = Vaccine.objects.all()
+    queryset = Vaccine.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = VaccineSerializer
     
     def list(self, request):
-        queryset = self.get_queryset()
-        serializer = VaccineSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_204_OK)
+        data = self.get_queryset()
+        serializer = VaccineSerializer(data, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -172,14 +171,14 @@ class VaccineDetail(generics.RetrieveUpdateDestroyAPIView):
     
     # growth=========>
 class GrowthList(generics.ListCreateAPIView):
-    querySet = Growth.objects.all()
+    queryset = Growth.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = GrowthSerializer
     
     def list(self, request):
         queryset = self.get_queryset()
         serializer = GrowthSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_204_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -202,7 +201,7 @@ class EmergingDiseaseList(generics.ListCreateAPIView):
     def list(self, request):
         queryset = self.get_queryset()
         serializer = EmergingDiseaseSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_204_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request):
         serializer = self.get_serializer(data=request.data)

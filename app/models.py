@@ -18,16 +18,12 @@ class Category(models.Model):
 
 class Vaccine(models.Model):
     vaccine = models.CharField(max_length=255)
-    brand_name = models.ManyToManyField(User, through='Cart')
-   
+    brand_name = models.CharField(max_length=255, null=True)
     batch_number = models.DecimalField(max_digits=12, decimal_places=2)
     drug_expiry = models.TextField()
     user_profile = CloudinaryField('image')
     next_appointment=models.CharField(max_length=50)
     date_given = models.DateField()
-    link = URLOrRelativeURLField(max_length=200)
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name='vaccines', null=True)
     
 
     def __str__(self):
@@ -70,7 +66,6 @@ class Growth(models.Model):
     height = models.IntegerField()
     HO = models.IntegerField()
     date = models.DateField()
-    link = URLOrRelativeURLField(max_length=200)
     
 
     def __str__(self):
