@@ -34,7 +34,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ("user_name", "parent_name", "place of birth", "contact", "location", "address", "DoB", "updated_at")
 
 class VaccineSerializer(serializers.ModelSerializer):
-    # category = serializers.StringRelatedField()
+    
     class Meta:
         model = Vaccine
         fields = ['vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment','user_profile','date_given'] 
@@ -42,7 +42,7 @@ class VaccineSerializer(serializers.ModelSerializer):
          
         # growth======
 class GrowthSerializer(serializers.ModelSerializer):
-    # category = serializers.StringRelatedField()
+    
     class Meta:
         model = Growth
         fields = ['patient','age', 'weight', 'height', 'HO','date']     
@@ -50,7 +50,7 @@ class GrowthSerializer(serializers.ModelSerializer):
     
     # emerging disease====
 class EmergingDiseaseSerializer(serializers.ModelSerializer):
-    # category = serializers.StringRelatedField()
+    
     class Meta:
         model = EmergingDisease
         fields = ['disease_name', 'patient']    

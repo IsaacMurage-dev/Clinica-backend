@@ -10,11 +10,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Category(models.Model):
-    name = models.CharField(max_length=100)
+# class Category(models.Model):
+#     name = models.CharField(max_length=100)
 
-    def __str__(self):
-        return f"{ self.name }"
+#     def __str__(self):
+#         return f"{ self.name }"
 
 class Vaccine(models.Model):
     vaccine = models.CharField(max_length=255)
