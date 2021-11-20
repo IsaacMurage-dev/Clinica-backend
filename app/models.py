@@ -87,7 +87,14 @@ class EmergingDisease(models.Model):
 
     def get_absolute_url(self):
         return reverse('desease_detail', kwargs={'pk': self.pk})
-
+# sms model
+class Sms(models.Model):
+    parent_name = models.CharField(max_length=200, blank=True, null=True)
+    email = models.EmailField(max_length=200, blank=True, null=True)
+    phone = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.name
    
     
     

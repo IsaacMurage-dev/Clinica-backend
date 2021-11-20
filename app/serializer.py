@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-from .models import Profile,Vaccine,EmergingDisease,Growth
+from .models import Profile, Sms,Vaccine,EmergingDisease,Growth,Sms
 
 # cloudinary
 from cloudinary.models import CloudinaryField
@@ -53,4 +53,10 @@ class EmergingDiseaseSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = EmergingDisease
-        fields = ['disease_name', 'patient']    
+        fields = ['disease_name', 'patient']   
+
+     #sms====     
+class SmsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sms
+        fields = ['parent_name', 'email', 'phone']

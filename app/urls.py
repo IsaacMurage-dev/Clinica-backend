@@ -18,7 +18,8 @@ urlpatterns = [
     url(r'^api/vaccine/$', views.VaccineList.as_view(), name="vaccines"),
     url(r'^api/emergingdisease/$', views.EmergingDiseaseList.as_view(), name="emergingDisease"),
     url(r'^api/growth/$', views.GrowthList.as_view(), name="growth"),
-    url(r'^api/vaccines/<int:pk>/', views.VaccineDetail.as_view(), name="vaccines_detail")
+    url(r'^api/vaccines/<int:pk>/', views.VaccineDetail.as_view(), name="vaccines_detail"),
+    url(r'^api/send-message',views.SendSmsMessage.as_view(),name="sms-message")
 ]
 
 

@@ -20,11 +20,24 @@ from rest_framework import status,generics
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,EmergingDiseaseSerializer,GrowthSerializer
+from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,EmergingDiseaseSerializer,GrowthSerializer,SmsSerializer
 
 # VaccineSerializer
 from .permissions import IsAdminOrReadOnly
 
+from decouple import config, Csv
+
+
+# sending of sms messages
+import africastalking
+
+username = config('AFRICASTALKING_USERNAME')
+api_key = config('AFRICASTALKING_API_KEY')
+
+africastalking.initialize(username, api_key)
+
+# Initialize the SMS service
+sms = africastalking.SMS
 
 # Create your views here.
 
@@ -216,3 +229,25 @@ class EmergingDiseaseDetail(generics.RetrieveUpdateDestroyAPIView):
     Lookup_url_kwargs = 'disease_id'
     
    
+class SendSmsMessage(APIView): # create user
+
+    # show either error message for sending sms or success message
+    def on_finish(error, response):
+        if error is not None:
+            raise error
+        print(response)
+
+    def post(self, request, format=None):  # create appointment
+        serializer = SmsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            # get the phone number from the appointment and send sms
+            phone_number = serializer.data['phone']
+            print(phone_number)
+            message = "Dear parent, Your Clinica acount has been created. You will receive a confirmation message shortly."
+            sms.send(message, [phone_number])
+            # get the admin phone number and send sms ============================
+            # admin_phone_number = User.objects.get(username='admin').phone
+            # sms.send("New appointment created ", [admin_phone_number], callback=self.on_finish)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
