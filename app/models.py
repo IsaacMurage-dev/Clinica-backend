@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 class Vaccine(models.Model):
     vaccine = models.CharField(max_length=255)
     brand_name = models.CharField(max_length=255, null=True)
-    batch_number = models.DecimalField(max_digits=12, decimal_places=2)
+    batch_number = models.CharField(max_length=50)
     drug_expiry = models.DateField()
     user_profile = CloudinaryField('image')
     next_appointment=models.CharField(max_length=50)
@@ -61,9 +61,9 @@ class Cart(models.Model):
     # growth=======>
 class Growth(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
-    age = models.IntegerField()
-    weight = models.IntegerField()
-    height = models.IntegerField()
+    age = models.DecimalField(max_digits=12, decimal_places=2)
+    weight = models.DecimalField(max_digits=12, decimal_places=2)
+    height = models.DecimalField(max_digits=12, decimal_places=2)
     HO = models.IntegerField()
     date = models.DateField()
     
