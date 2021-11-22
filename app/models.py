@@ -85,8 +85,8 @@ class MedicalHistory(models.Model):
     def __str__(self):
         return f"{ self.disease_history }"
 
-    def get_absolute_url(self):
-        return reverse('desease_detail', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #     return reverse('disease_detail', kwargs={'pk': self.pk})
 # sms model
 class Sms(models.Model):
     parent_name = models.CharField(max_length=200, blank=True, null=True)
