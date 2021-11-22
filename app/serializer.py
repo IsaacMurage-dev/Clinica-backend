@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 
-from .models import Profile, Sms,Vaccine,EmergingDisease,Growth,Sms
+from .models import Profile, Sms,Vaccine,EmergingDisease,Growth
 
 # cloudinary
 from cloudinary.models import CloudinaryField
