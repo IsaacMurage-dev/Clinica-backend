@@ -97,5 +97,3 @@ class Sms(models.Model):
         return self.name
    
     
-    
-    

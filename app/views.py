@@ -244,7 +244,7 @@ class SendSmsMessage(APIView): # create user
             # get the phone number from the appointment and send sms
             phone_number = serializer.data['phone']
             print(phone_number)
-            message = "Dear parent, Your Clinica acount has been created. You will receive a confirmation message shortly."
+            message = "Dear parent,you child's next appointment will be in a month's time .You will receive a confirmation message for the same."
             sms.send(message, [phone_number])
             # get the admin phone number and send sms ============================
             # admin_phone_number = User.objects.get(username='admin').phone
