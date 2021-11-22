@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^api/auth/login/$', views.loginUser.as_view()), # login user
     url(r'^api/auth/logout/$', views.logoutUser.as_view()), # logout user
     url(r'^api/vaccine/$', views.VaccineList.as_view(), name="vaccines"),
-    url(r'^api/emergingdisease/$', views.EmergingDiseaseList.as_view(), name="emergingDisease"),
+    url(r'^api/medicalhistory/$', views.MedicalHistoryList.as_view(), name="medicalHistory"),
     url(r'^api/growth/$', views.GrowthList.as_view(), name="growth"),
     url(r'^api/vaccines/<int:pk>/', views.VaccineDetail.as_view(), name="vaccines_detail"),
     url(r'^api/send-message',views.SendSmsMessage.as_view(),name="sms-message")

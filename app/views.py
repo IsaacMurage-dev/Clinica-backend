@@ -4,7 +4,7 @@ from rest_framework import permissions, serializers
 from rest_framework.settings import perform_import
 
 from app.permissions import IsAdminOrReadOnly
-from .models import Profile, Vaccine, EmergingDisease,Growth
+from .models import Profile, Vaccine, MedicalHistory,Growth
 
 from django.contrib.auth.models import User
 from rest_framework.exceptions import NotFound
@@ -20,7 +20,7 @@ from rest_framework import status,generics
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,EmergingDiseaseSerializer,GrowthSerializer,SmsSerializer
+from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,MedicalHistorySerializer,GrowthSerializer,SmsSerializer
 
 # VaccineSerializer
 from .permissions import IsAdminOrReadOnly
@@ -205,15 +205,15 @@ class GrowthDetail(generics.RetrieveUpdateDestroyAPIView):
     Lookup_url_kwargs = 'growth_id'
 
 
-# emerging disease=========>
-class EmergingDiseaseList(generics.ListCreateAPIView):
-    querySet = EmergingDisease.objects.all()
+# medical history=========>
+class MedicalHistoryList(generics.ListCreateAPIView):
+    querySet = MedicalHistory.objects.all()
     permission_classes = [IsAuthenticated]
-    serializer_class = EmergingDiseaseSerializer
+    serializer_class = MedicalHistorySerializer
     
     def list(self, request):
         queryset = self.get_queryset()
-        serializer = EmergingDiseaseSerializer(queryset, many=True)
+        serializer = MedicalHistorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def create(self, request):
@@ -223,9 +223,9 @@ class EmergingDiseaseList(generics.ListCreateAPIView):
         return Response({'message': f"Disease has been created"}, status=status.HTTP_201_CREATED)
         
 
-class EmergingDiseaseDetail(generics.RetrieveUpdateDestroyAPIView):
+class MedicalHistoryDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = EmergingDiseaseSerializer
+    serializer_class = MedicalHistorySerializer
     Lookup_url_kwargs = 'disease_id'
     
    

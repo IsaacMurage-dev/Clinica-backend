@@ -75,15 +75,15 @@ class Growth(models.Model):
             return reverse('', kwargs={'pk': self.pk})
 
 
-# emerging disease==============>
-class EmergingDisease(models.Model):
+# medical disease==============>
+class MedicalHistory(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
-    disease_name = models.CharField(max_length=200)
-    next_appointment=models.CharField(max_length=50)
+    disease_history = models.TextField(max_length=200)
+    doctor_recommendation = models.TextField(max_length=200)
     
 
     def __str__(self):
-        return f"{ self.disease_name }"
+        return f"{ self.disease_history }"
 
     def get_absolute_url(self):
         return reverse('desease_detail', kwargs={'pk': self.pk})
