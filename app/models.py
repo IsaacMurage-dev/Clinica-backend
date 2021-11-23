@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 
 
 class Vaccine(models.Model):
-    patient = models.OneToOneField(User, on_delete=models.CASCADE)
+    patient = models.Foreignkey(User, on_delete=models.CASCADE)
     vaccine = models.CharField(max_length=255)
     brand_name = models.CharField(max_length=255, null=True)
     batch_number = models.CharField(max_length=50)
