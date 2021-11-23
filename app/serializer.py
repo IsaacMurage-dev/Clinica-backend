@@ -27,6 +27,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ("profile_pic", "contact", "location", "isDctor")
+
 # Profile serializer
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -20,7 +20,7 @@ from rest_framework import status,generics
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import  ProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,MedicalHistorySerializer,GrowthSerializer,SmsSerializer
+from .serializer import  ProfileSerializer, UserProfileSerializer, UserSerializer,UserCreateSerializer, VaccineSerializer,MedicalHistorySerializer,GrowthSerializer,SmsSerializer
 
 # VaccineSerializer
 from .permissions import IsAdminOrReadOnly
@@ -67,7 +67,9 @@ class UserCreate(APIView): # create user
         serializer = UserCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            data = serializer.data
+            data["isDoctor"] = False
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 
@@ -80,8 +82,13 @@ class loginUser(APIView):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                profile = user.profile
                 serializer = UserSerializer(user)
-                return Response(serializer.data)
+                data = serializer.data
+                data["contact"] = profile.contact
+                data["location"] = profile.location
+                data["isDoctor"] = profile.isDoctor
+                return Response(data)
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
