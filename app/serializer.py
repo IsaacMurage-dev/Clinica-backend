@@ -27,6 +27,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ("profile_pic", "contact", "location", "isDctor")
+
 # Profile serializer
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,7 +42,7 @@ class VaccineSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Vaccine
-        fields = ['patient','vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment','user_profile','date_given'] 
+        fields = ['patient','vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment', 'date_given'] 
         
          
         # growth======
