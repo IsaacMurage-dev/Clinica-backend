@@ -42,7 +42,7 @@ class VaccineSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Vaccine
-        fields = ['patient','vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment','user_profile','date_given'] 
+        fields = ['patient','vaccine', 'brand_name', 'batch_number', 'drug_expiry', 'next_appointment', 'date_given'] 
         
          
         # growth======

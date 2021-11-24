@@ -15,12 +15,11 @@ from django.contrib.auth.models import User
 
 
 class Vaccine(models.Model):
-    patient = models.OneToOneField(User, on_delete=models.CASCADE)
+    patient = models.ForeignKey(User, on_delete=models.CASCADE)
     vaccine = models.CharField(max_length=255)
     brand_name = models.CharField(max_length=255, null=True)
     batch_number = models.CharField(max_length=50)
     drug_expiry = models.DateField()
-    user_profile = CloudinaryField('image')
     next_appointment=models.CharField(max_length=50)
     date_given = models.DateField()
     
@@ -83,7 +82,6 @@ class MedicalHistory(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
     disease_history = models.TextField(max_length=200)
     doctor_recommendation = models.TextField(max_length=200)
-    
 
     def __str__(self):
         return f"{ self.disease_history }"

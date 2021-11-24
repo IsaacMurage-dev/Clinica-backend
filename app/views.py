@@ -54,9 +54,19 @@ class UserList(APIView): # list all users
     permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+        users = User.objects.filter(profile__isDoctor=False).values("id", "first_name", "last_name", "email").all()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            user = User.objects.get(id=user_id)
+            profile = user.profile
+            serializer = UserSerializer(user)
+            data = serializer.data
+            data["user_id"] = user.id
+            data["contact"] = profile.contact
+            data["location"] = profile.location
+            data["isDoctor"] = True
+            users = data
+        return Response(users)
 
 class UserCreate(APIView): # create user
     """
@@ -85,6 +95,7 @@ class loginUser(APIView):
                 profile = user.profile
                 serializer = UserSerializer(user)
                 data = serializer.data
+                data["user_id"] = user.id
                 data["contact"] = profile.contact
                 data["location"] = profile.location
                 data["isDoctor"] = profile.isDoctor
@@ -156,7 +167,11 @@ class VaccineList(generics.ListCreateAPIView):
     serializer_class = VaccineSerializer
     
     def list(self, request):
-        data = self.get_queryset()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            data = Vaccine.objects.filter(patient__id=user_id)
+        else:
+            data = self.get_queryset()
         serializer = VaccineSerializer(data, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -197,6 +212,10 @@ class GrowthList(generics.ListCreateAPIView):
     
     def list(self, request):
         queryset = self.get_queryset()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            queryset = Growth.objects.filter(patient__id=user_id)
+
         serializer = GrowthSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -220,6 +239,10 @@ class MedicalHistoryList(generics.ListCreateAPIView):
     
     def list(self, request):
         queryset = self.get_queryset()
+        user_id = request.query_params.get('user_id')
+        if user_id:
+            queryset = MedicalHistory.objects.filter(patient__id=user_id)
+            
         serializer = MedicalHistorySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
